@@ -165,3 +165,98 @@ Due to this, the fact that javascript is asynchronous helps in heaps. Here's an 
 Here, we pass in an anonymous function (this is common) to `window.setTimeout`, a function that waits some time before happening.
 The application of passing callbacks goes very far, but try not to take it too far. It is very easy to get into "callback hell", where you have callbackception. If you run into this, think about refactoring your code, because there is a better way about it.
 
+##jQuery
+
+An awesome library that abstracts away DOM-Selection, cool effects, event-handling, etc.
+
+    window.jQuery = window.$ = jQuery; //$ is nothing more than a function
+    
+    $(document).ready(function() {
+      alert("Hello world");
+    });
+    
+    //select
+    $('body')
+    $('footer')
+    $('.post')
+    $('#profile_pic')
+    
+    //make content
+    $('<div>content</div>')
+    $('#container').append(new_element); // Add new_element as the last child of #container
+    $('#container').prepend(new_element); // Add new_element as the first child of #container
+    $('#container').after(new_element); // Add new_element after #container
+    $('#container').before(new_element); // Add new_element before #container
+    
+    //Getters and setters are almost always the same function:
+    
+    // This is the getter. It grabs the HTML contents of #profile:
+    $('#profile').html();
+    
+    // This is the setter. It sets the HTML contents of #profile:
+    $('#profile').html('<div>This is sooo cool</div>');
+    
+    //filtering
+    $('.post').filter('.important')
+    
+    $('#title').addClass('large');
+    $('#title').removeClass('boring');
+
+    // Swap a class on/off:
+    $('#profile').toggleClass('edit-mode');
+    
+    $('#title').css({
+      'font-size':'100px',
+      'color':'blue'
+    });
+    
+    $('.post').first().css({
+  	'color':'red',
+  	'border':'2px solid red',
+  	'background':'yellow',
+  	'box-shadow':'0 0 20px 2px pink',
+  	'font-family':'comic-sans'
+    });
+    
+    // Bind '.clickme' to a click event:
+    $('.clickme').on('click', function() {
+  	alert("Good job, you clicked me!");
+    });
+
+    // Unbind the event:
+    $('.clickme').off('click');
+    
+##AJAX
+
+    $.ajax
+    $.get
+    $.post
+    
+    $.ajax({
+  	url: "/widgets/1.json",
+  	type: "GET",
+  	success: function (widgetData) {
+    		console.log("Here are the fetched json parameters of the widget:");
+    		console.log(widgetData);
+  	}
+    });
+
+    $.ajax({
+        url: "/widgets.json",
+        type: "POST",
+        data: {
+            name: "The Best Widget",
+            maker: "The Widget King"
+        }, 
+        success: function (widgetData) {
+          console.log("Widget created!");
+
+          // `create` action should `render :json => @widget`
+          // this gives the client access to the `id` attribute issued by
+          // the server.
+          console.log("issued id: " + widgetData.id);
+       }
+    });
+
+    
+    
